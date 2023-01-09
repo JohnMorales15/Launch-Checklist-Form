@@ -15,6 +15,23 @@
 
 
 window.addEventListener("load", function() {
+   this.fetch("https://handlers.education.launchcode.org/static/planets.json").then(function(response){
+      response.json().then(function(json){
+         let div = document.getElementById("missionTarget");
+         let destination = Math.round(Math.random()*6);
+         div.innerHTML = `
+         <h2>Mission Destination</h2>
+         <ul>
+            <li>Name: ${json[destination].name}}</li>
+            <li>Diameter: ${json[destination].diameter}</li>
+            <li>Star: ${json[destination].star}</li>
+            <li>Distance from Earth: ${json[destination].distance}</li>
+            <li>Number of Moons: ${json[destination].moons}</li>
+         </ul>
+         <img src="${json[destination].image}">`
+      })
+   })
+
    let form = this.document.getElementById("launchForm");
    form.addEventListener("submit", function(event){
       let pilotName = document.querySelector("input[name=pilotName]");
